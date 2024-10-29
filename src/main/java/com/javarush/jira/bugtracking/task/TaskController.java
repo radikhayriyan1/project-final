@@ -93,6 +93,13 @@ public class TaskController {
         handler.enable(id, enabled);
     }
 
+    @PostMapping("/{id}/tags")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> addTagToTask(@PathVariable long id, @RequestBody String tagText) {
+        taskService.addTagToTask(id, tagText);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
     @PatchMapping("/{id}/change-status")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void changeTaskStatus(@PathVariable long id, @NotBlank @RequestParam String statusCode) {

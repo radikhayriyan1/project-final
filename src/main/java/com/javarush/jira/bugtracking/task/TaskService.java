@@ -86,6 +86,13 @@ public class TaskService {
         }
     }
 
+    @Transactional
+    public void addTagToTask(long taskId, String tagText) {
+        Task task = handler.getRepository().getExisted(taskId);
+        task.getTags().add(tagText);
+        handler.getRepository().save(task);
+    }
+
     public TaskToFull get(long id) {
         Task task = Util.checkExist(id, handler.getRepository().findFullById(id));
         TaskToFull taskToFull = fullMapper.toTo(task);
